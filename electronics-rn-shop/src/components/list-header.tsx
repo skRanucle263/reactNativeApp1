@@ -1,8 +1,11 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, TouchableOpacity, Text, View, FlatList } from 'react-native'
 import { Link } from 'expo-router'
 import { FontAwesome } from '@expo/vector-icons';
+import { CATEGORIES } from '../../assets/categories';
 
 export const ListHeader = () => {
+  const handleSignOut = async () => { };
+
   return (
     <View style={[styles.headerContainer]}>
       <View style={styles.headerTop}>
@@ -34,10 +37,40 @@ export const ListHeader = () => {
               )}
             </Pressable>
           </Link>
-          </View>
+          <TouchableOpacity
+            onPress={handleSignOut}
+            style={styles.signOutButton}
+          >
+            <FontAwesome name='sign-out' size={25} color='red' />
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.heroContainer}></View>
-      <View style={styles.categoriesContainer}></View>
+      <View style={styles.heroContainer}>
+        <Image
+          source={require("../../assets/images/hero.png")}
+          style={styles.heroImage}
+        />
+      </View>
+      <View style={styles.categoriesContainer}>
+        <Text style={styles.sectionTitle}>Categories</Text>
+        <FlatList
+          data={CATEGORIES}
+          renderItem={({ item }) => (
+            <Link href={`/categories/${item.slug}`} asChild>
+              <Pressable style={styles.category}>
+                <Image
+                  source={{ uri: item.imageUrl }}
+                  style={styles.categoryImage}
+                />
+                <Text style={styles.categoryText}>{item.name}</Text>
+              </Pressable>
+            </Link>
+          )}
+          keyExtractor={item => item.name}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
     </View>
   )
 }
