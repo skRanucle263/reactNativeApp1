@@ -18,3 +18,12 @@ npm expo start : Start App , npx expo start -c : Cache Clean and Start
 npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
 In the package.json paste the following "main": "expo-router/entry",
 Check the babel.config.js for presets: ['babel-preset-expo'],
+
+### 4. Step-4 :
+
+npm i zustand / npx expo install zustand => Zustand is used for state-management
+--force flag if not able to install
+
+### 5. Step-5 :
+
+npm i react-native-toast-notifications
