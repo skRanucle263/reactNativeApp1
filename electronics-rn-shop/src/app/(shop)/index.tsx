@@ -1,5 +1,5 @@
 import {
-  ActivityIndicator,
+  ScrollView,
   FlatList,
   StyleSheet,
   View,
@@ -11,20 +11,20 @@ import { ListHeader } from '../../components/list-header';
 
 const Home = () => {
   return (
-    <View>
-      <FlatList
-        data={PRODUCTS}
-        renderItem={({ item }) => <ProductListItem product={item} />
-        }
-        keyExtractor={item => item.id.toString()}
-        numColumns={2}
-        ListHeaderComponent={<ListHeader />}
-        contentContainerStyle={styles.flatListContent}
-        columnWrapperStyle={styles.flatListColumn}
-        style={{ paddingHorizontal: 10, paddingVertical: 5 }}
-      />
-      <Text>Shop</Text>
-    </View>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <View style={{ maxWidth: '100%' }}>
+        <FlatList
+          data={PRODUCTS}
+          renderItem={({ item }) => <ProductListItem product={item} />}
+          keyExtractor={item => item.id.toString()}
+          numColumns={2}
+          ListHeaderComponent={<ListHeader />}
+          contentContainerStyle={styles.flatListContent}
+          columnWrapperStyle={styles.flatListColumn}
+          style={{ paddingHorizontal: 10, paddingVertical: 5 }}
+        />
+      </View>
+    </ScrollView>
   );
 };
 

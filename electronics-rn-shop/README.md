@@ -1,4 +1,4 @@
-## Setup Commands =>
+## Setup and Node / Expo Packages Commands =>
 
 ### 1. Step-1 :
 
@@ -27,3 +27,7 @@ npm i zustand / npx expo install zustand => Zustand is used for state-management
 ### 5. Step-5 :
 
 npm i react-native-toast-notifications
+
+### 6. Step-6 :
+
+npm i zod react-hook-form @hookform/resolvers

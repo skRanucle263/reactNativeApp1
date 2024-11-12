@@ -1,33 +1,35 @@
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from 'react-native'
 import React from "react";
 import { FontAwesome } from '@expo/vector-icons';
 
+
 function TabBarIcon(props: {
     name: React.ComponentProps<typeof FontAwesome>['name'];
     color: string;
 }) {
-    return <FontAwesome size={20} {...props} style={{ color: '#FFA001' }} />;
+    return <FontAwesome size={24} {...props} style={{ color: '#1BC464' }} />;
 }
+
+
 
 const TabsLayout = () => {
     return (
         <SafeAreaView edges={["top"]} style={styles.safeArea}>
-            <Tabs
-                screenOptions={{
-                    headerShown: false,
-                    tabBarActiveTintColor: "#FFA001",
-                    tabBarInactiveTintColor: "gray",
-                    tabBarLabelStyle: { fontSize: 16 },
-                    tabBarStyle: {
-                        borderTopLeftRadius: 20,
-                        borderTopRightRadius: 20,
-                        padding: 2,
-                        height: 60,
-                        paddingBottom: 10
-                    }
-                }}>
+            <Tabs screenOptions={{
+                tabBarActiveTintColor: '#1BC464',
+                tabBarInactiveTintColor: 'gray',
+                tabBarLabelStyle: { fontSize: 16 },
+                tabBarStyle: {
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    paddingTop: 10,
+                    paddingBottom: 10
+                },
+                headerShown: false,
+            }}
+            >
                 <Tabs.Screen
                     name="index"
                     options={{
@@ -57,4 +59,4 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1
     }
-})
+});

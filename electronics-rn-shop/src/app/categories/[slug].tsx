@@ -13,7 +13,6 @@ const Category = () => {
 
   const products = PRODUCTS.filter(p => p.category.slug === slug);
 
-
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: category.name }} />
@@ -28,10 +27,10 @@ const Category = () => {
         contentContainerStyle={styles.productsList}
       />
     </View>
-  )
-}
+  );
+};
 
-export default Category
+export default Category;
 
 const styles = StyleSheet.create({
   container: {
