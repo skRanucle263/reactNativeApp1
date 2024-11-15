@@ -1,30 +1,67 @@
-import { Controller, useForm } from 'react-hook-form';
-import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    ImageBackground,
+    TextInput,
+    TouchableOpacity,
+} from 'react-native';
+import { useForm, Controller } from 'react-hook-form';
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Redirect } from 'expo-router';
+import { supabase } from '../lib/supabase';
+import { Toast } from 'react-native-toast-notifications';
+import { useAuth } from '../providers/auth-provider';
 import React from 'react';
 
 const authSchema = zod.object({
     email: zod.string().email({ message: 'Invalid email address' }),
     password: zod
         .string()
-        .min(8, { message: 'Password must be at least 8 characters long' }),
+        .min(6, { message: 'Password must be at least 6 characters long' }),
 });
 
 export default function Auth() {
+    const { session } = useAuth();
+
+    if (session) return <Redirect href='/' />;
+
     const { control, handleSubmit, formState } = useForm({
         resolver: zodResolver(authSchema),
         defaultValues: {
             email: '',
             password: '',
-        }
-    })
+        },
+    });
+
     const signIn = async (data: zod.infer<typeof authSchema>) => {
-        console.log(data);
-    }
+        const { error } = await supabase.auth.signInWithPassword(data);
+        if (error) {
+            alert(error.message);
+        } else {
+            Toast.show('Signed in successfully', {
+                type: 'success',
+                placement: 'top',
+                duration: 1500,
+            });
+        }
+    };
     const signUp = async (data: zod.infer<typeof authSchema>) => {
-        console.log(data);
-    }
+        const { error } = await supabase.auth.signUp(data);
+        if (error) {
+            alert(error.message);
+            console.log(error);
+            console.error(error);
+        } else {
+            Toast.show('Signed up successfully', {
+                type: 'success',
+                placement: 'top',
+                duration: 1500,
+            });
+        }
+    };
+
     return (
         <ImageBackground
             source={{
@@ -37,6 +74,7 @@ export default function Auth() {
             <View style={styles.container}>
                 <Text style={styles.title}>Welcome</Text>
                 <Text style={styles.subtitle}>Please Authenticate to continue</Text>
+
                 <Controller
                     control={control}
                     name='email'
@@ -83,7 +121,6 @@ export default function Auth() {
                     )}
                 />
 
-
                 <TouchableOpacity
                     style={styles.button}
                     onPress={handleSubmit(signIn)}
@@ -102,8 +139,6 @@ export default function Auth() {
         </ImageBackground>
     );
 }
-
-
 
 const styles = StyleSheet.create({
     backgroundImage: {

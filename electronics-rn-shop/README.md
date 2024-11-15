@@ -30,4 +30,12 @@ npm i react-native-toast-notifications
 
 ### 6. Step-6 :
 
-npm i zod react-hook-form @hookform/resolvers
+npm i zod react-hook-form @hookform/resolvers --force
+
+### 7. Step-7 :
+
+npm install @supabase/supabase-js @react-native-async-storage/async-storage @rneui/themed aes-js react-native-get-random-values --force
+npx expo install expo-secure-store / npm install expo-secure-store@latest --force
+npm i --save-dev @types/aes-js --force
+npm install expo-secure-store @supabase/supabase-js react-native-url-polyfill --force
+npm install expo-secure-store @react-native-async-storage/async-storage aes-js react-native-get-random-values --force
