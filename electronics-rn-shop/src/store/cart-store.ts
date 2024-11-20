@@ -3,7 +3,7 @@ import { create } from 'zustand';
 type CartItemType = {
   id: number;
   title: string;
-  heroImage: string;
+  heroImage: string | number;
   price: number;
   quantity: number;
   maxQuantity: number;

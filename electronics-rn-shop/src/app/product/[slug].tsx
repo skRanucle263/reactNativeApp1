@@ -49,7 +49,7 @@ const ProductDetails = () => {
         addItem({
             id: product.id,
             title: product.title,
-            heroImage: product.heroImage as string,
+            heroImage: product.heroImage, // No type casting needed
             price: product.price,
             quantity,
             maxQuantity: product.maxQuantity,
@@ -66,9 +66,10 @@ const ProductDetails = () => {
     return (
         <View style={styles.container}>
             <Stack.Screen options={{ title: product.title }} />
-
-            <Image source={{ uri: product.heroImage as string }} style={styles.heroImage} />
-
+            <Image
+                source={product.heroImage} // Remove 'as string' and use direct require
+                style={styles.heroImage}
+            />
             <View style={{ padding: 16, flex: 1 }}>
                 <Text style={styles.title}>Title: {product.title}</Text>
                 <Text style={styles.slug}>Slug: {product.slug}</Text>
@@ -83,7 +84,7 @@ const ProductDetails = () => {
                     data={product.imagesUrl}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => (
-                        <Image source={{ uri: item as string }} style={styles.image} />
+                        <Image source={item} style={styles.image} />
                     )}
                     horizontal
                     showsHorizontalScrollIndicator={false}
